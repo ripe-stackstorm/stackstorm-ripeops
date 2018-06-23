@@ -1,12 +1,15 @@
 ---
 action:
     parameters:
-        trigger: '{{ trigger }}'
+        committer: '{{ trigger.committer }}'
+        repository_url: '{{ trigger.repository_url }}'
+        commit_message: '{{ trigger.commit_message }}'
+        branch: '{{ trigger.branch }}'
     ref: ripeops.update_pack
 criteria: {}
 enabled: true
 name: update_pack
-pack: git
+pack: ripeops
 ref: git.update_pack
 tags: []
 trigger:

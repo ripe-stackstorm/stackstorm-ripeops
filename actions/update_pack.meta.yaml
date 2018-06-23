@@ -1,31 +1,24 @@
 ---
-  version: '2.0'
-
-  ripeops.update_pack:
-
-    input:
-      - trigger
-
-    type: direct
-
-    tasks:
-
-      update_pack:
-        action: "git.update_pack"
-        input:
-          packs:
-          - '{{ trigger.repository_url }}'
-        on-success: "post_update_slack"
-
-      post_update_slack:
-        action: "slack.chat.postMessage"
-        input:
-          text: "foo"
-          channel: "ripe-hackathon-atlas"
-        on-success: "post_update_slack_2"
-      
-      post_update_slack2:
-        action: "slack.chat.postMessage"
-        input:
-          text: "foo"
-          channel: "ripe-hackathon-go"
+  name: "update_pack"
+  description: ""
+  runner_type: "mistral-v2"
+  pack: ripeops
+  enabled: true
+  entry_point: "workflows/update_pack.yaml"
+  parameters:
+    committer:
+      required: true
+      description: ""
+      type: string
+    repository_url:
+      required: true
+      description: ""
+      type: string
+    commit_message:
+      required: true
+      description: ""
+      type: string
+    branch:
+      required: true
+      description: ""
+      type: string

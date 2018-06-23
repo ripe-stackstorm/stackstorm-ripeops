@@ -1,12 +1,37 @@
 ---
-  name: "update_pack"
-  description: ""
-  runner_type: "mistral-v2"
-  pack: ripeops
-  enabled: true
-  entry_point: "workflows/update_pack.yaml"
-  parameters:
-    trigger:
-      required: true
-      description: ""
-      type: object
+  version: '2.0'
+
+  ripeops.update_pack:
+
+    input:
+      - committer
+      - repository_url
+      - commit_message
+      - branch
+    type: direct
+
+    tasks:
+
+      update_pack:
+        action: "packs.install"
+        input:
+          packs:
+          - '{{ _.repository_url }}'
+        on-success: "post_update_slack"
+
+      post_update_slack:
+        action: "slack.chat.postMessage"
+        input:
+          text: |
+            {{ _.committer }} just merged the following commit into the {{ _.branch }} branch of {{ _.repository_url }}
+            {{ _.commit_message }}
+          channel: "ripe-hackathon-atlas"
+        on-success: "post_update_slack_2"
+      
+      post_update_slack_2:
+        action: "slack.chat.postMessage"
+        input:
+          text: |
+            {{ _.committer }} just merged the following commit into the {{ _.branch }} branch of {{ _.repository_url }}
+            {{ _.commit_message }}
+          channel: "ripe-hackathon-go"
