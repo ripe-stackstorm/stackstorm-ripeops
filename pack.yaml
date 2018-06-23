@@ -1,0 +1,10 @@
+---
+name: ripeops
+description: RIPE ops pack
+keywords:
+    - ripe
+    - atlas
+    - measurements
+version: 0.1.0
+author: mierdin
+email: info@stackstorm.com

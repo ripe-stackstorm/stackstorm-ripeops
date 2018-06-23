@@ -1,0 +1,4 @@
+---
+repositories:
+  - url: "https://github.com/ripe-stackstorm/stackstorm-atlas.git"
+    branch: "master"

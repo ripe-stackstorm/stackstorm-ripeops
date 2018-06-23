@@ -1,0 +1,19 @@
+---
+action:
+    parameters:
+        trigger: '{{ trigger }}'
+    ref: ripeops.update_pack
+criteria: {}
+enabled: true
+name: update_pack
+pack: git
+ref: git.update_pack
+tags: []
+trigger:
+    parameters: {}
+    ref: git.head_sha_monitor
+    type: git.head_sha_monitor
+type:
+    parameters: {}
+    ref: standard
+uid: rule:git:update_pack

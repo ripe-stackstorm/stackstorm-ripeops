@@ -1,0 +1,12 @@
+---
+  name: "update_pack"
+  description: ""
+  runner_type: "mistral-v2"
+  pack: ripeops
+  enabled: true
+  entry_point: "workflows/update_pack.yaml"
+  parameters:
+    trigger:
+      required: true
+      description: ""
+      type: object
